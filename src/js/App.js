@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import ExpenseForm from './ExpenseForm';
+import ExpenseList from './ExpenseList';
 
 const App = () => {
     return (
@@ -9,6 +10,7 @@ const App = () => {
             <div className="container">
                 <Header/>
                 <ExpenseForm/>
+                <ExpenseList/>
                 <Footer/>
             </div>
         </React.Fragment>

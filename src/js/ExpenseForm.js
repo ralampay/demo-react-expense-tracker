@@ -4,6 +4,7 @@ const ExpenseForm = () => {
 
     const [item, setItem] = useState("");
     const [amount, setAmount] = useState(0.00);
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleItemOnChange = (event) => {
         setItem(event.target.value)
@@ -23,6 +24,7 @@ const ExpenseForm = () => {
                                     className="form-control"
                                     value={item}
                                     onChange={handleItemOnChange}
+                                    disabled={isSubmitting}
                                 />
                             </div>
                         </div>
@@ -35,6 +37,7 @@ const ExpenseForm = () => {
                                     className="form-control" 
                                     type="number"
                                     value={amount}
+                                    disabled={isSubmitting}
                                     onChange={(event) => {
                                         setAmount(event.target.value);
                                     }}
@@ -43,7 +46,20 @@ const ExpenseForm = () => {
                         </div>
                     </div>
                     <hr/>
-                    <button className="btn btn-primary w-100">
+                    <button 
+                        className="btn btn-primary w-100"
+                        disabled={isSubmitting}
+                        onClick={() => {
+                            setIsSubmitting(true);
+
+                            const payload = {
+                                item: item,
+                                amount: amount
+                            }
+
+                            console.log(payload)
+                        }}
+                    >
                         Save
                     </button>
                 </div>
