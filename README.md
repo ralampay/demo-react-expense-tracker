@@ -10,4 +10,10 @@ Download dependencies
 npm install
 ```
 
+Run the application
+
+```
+npm run start
+```
+
 ## Deploy
