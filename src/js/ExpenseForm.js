@@ -5,6 +5,10 @@ const ExpenseForm = () => {
     const [item, setItem] = useState("");
     const [amount, setAmount] = useState(0.00);
 
+    const handleItemOnChange = (event) => {
+        setItem(event.target.value)
+    }
+
     return (
         <React.Fragment>
             <div className="card">
@@ -18,9 +22,7 @@ const ExpenseForm = () => {
                                 <input 
                                     className="form-control"
                                     value={item}
-                                    onChange={(event) => {
-                                        setItem(event.target.value);
-                                    }}
+                                    onChange={handleItemOnChange}
                                 />
                             </div>
                         </div>
