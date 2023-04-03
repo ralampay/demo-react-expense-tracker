@@ -12,6 +12,18 @@ const App = () => {
         { id: 3, name: "Item C", amount: 300.0 }
     ]);
 
+    const deleteItem = (id) => {
+        let newItems = items.filter((item) => {
+            if (item.id == id) {
+                return false;
+            } else {
+                return true;
+            }
+        })
+
+        setItems(newItems);
+    }
+
     return (
         <React.Fragment>
             <div className="container">
@@ -19,6 +31,7 @@ const App = () => {
                 <ExpenseForm/>
                 <ExpenseList
                     items={items}
+                    deleteItem={deleteItem}
                 />
                 <Footer/>
             </div>

@@ -31,7 +31,7 @@ const ExpenseList = (props) => {
                                     <button
                                         className="btn btn-danger w-100"
                                         onClick={() => {
-                                            props.foo();
+                                            props.deleteItem(item.id);
                                         }}
                                     >
                                         Delete
