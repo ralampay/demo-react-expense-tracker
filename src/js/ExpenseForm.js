@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
     const [item, setItem] = useState("");
     const [amount, setAmount] = useState(0.00);
@@ -53,11 +53,15 @@ const ExpenseForm = () => {
                             setIsSubmitting(true);
 
                             const payload = {
-                                item: item,
+                                name: item,
                                 amount: amount
                             }
 
-                            console.log(payload)
+                            props.addItem(payload.name, payload.amount);
+
+                            setIsSubmitting(false);
+                            setItem("");
+                            setAmount(0.00);
                         }}
                     >
                         Save

@@ -24,11 +24,27 @@ const App = () => {
         setItems(newItems);
     }
 
+    const addItem = (name, amount) => {
+        // Copy current items
+        let newItems = [...items];
+        let newId = 4;
+        let newItem = {
+            id: newId,
+            name: name,
+            amount: amount
+        }
+
+        newItems.push(newItem);
+        setItems(newItems);
+    }
+
     return (
         <React.Fragment>
             <div className="container">
                 <Header/>
-                <ExpenseForm/>
+                <ExpenseForm
+                    addItem={addItem}
+                />
                 <ExpenseList
                     items={items}
                     deleteItem={deleteItem}

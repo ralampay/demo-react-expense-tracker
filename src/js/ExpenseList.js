@@ -2,10 +2,14 @@ import React, { useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
 const ExpenseList = (props) => {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [currentId, setCurrentId] = useState(-1);
+
     return (
         <React.Fragment>
             <Modal
-                show={false}
+                show={isModalOpen}
             >
                 <Modal.Header>
                     <Modal.Title>
@@ -20,11 +24,18 @@ const ExpenseList = (props) => {
                 <Modal.Footer>
                     <button
                         className="btn btn-success"
+                        onClick={() => {
+                            props.deleteItem(currentId);
+                            setIsModalOpen(false);
+                        }}
                     >
                         Yes
                     </button>
                     <button
                         className="btn btn-danger"
+                        onClick={() => {
+                            setIsModalOpen(false);
+                        }}
                     >
                         No
                     </button>
@@ -58,7 +69,8 @@ const ExpenseList = (props) => {
                                     <button
                                         className="btn btn-danger w-100"
                                         onClick={() => {
-                                            props.deleteItem(item.id);
+                                            setIsModalOpen(true);
+                                            setCurrentId(item.id);
                                         }}
                                     >
                                         Delete
