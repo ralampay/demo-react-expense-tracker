@@ -1,13 +1,6 @@
 import React, { useState } from 'react';
 
-const ExpenseList = () => {
-
-    const [items, setItems] = useState([
-        { id: 1, name: "Item A", amount: 100.0 },
-        { id: 2, name: "Item B", amount: 200.0 },
-        { id: 3, name: "Item C", amount: 300.0 }
-    ]);
-
+const ExpenseList = (props) => {
     return (
         <React.Fragment>
             <table className="table table-sm table-bordered mt-2">
@@ -19,10 +12,13 @@ const ExpenseList = () => {
                         <th>
                             Amount
                         </th>
+                        <th>
+                            Actions
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {items.map((item) => {
+                    {props.items.map((item) => {
                         return (
                             <tr key={`item-row-${item.id}`}>
                                 <td>
@@ -30,6 +26,16 @@ const ExpenseList = () => {
                                 </td>
                                 <td>
                                     {item.amount}
+                                </td>
+                                <td>
+                                    <button
+                                        className="btn btn-danger w-100"
+                                        onClick={() => {
+                                            props.foo();
+                                        }}
+                                    >
+                                        Delete
+                                    </button>
                                 </td>
                             </tr>
                         )
