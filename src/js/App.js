@@ -1,11 +1,14 @@
 import React from 'react';
+import Header from './Header';
+import Footer from './Footer';
 
 const App = () => {
     return (
         <React.Fragment>
-            <h1>
-                Expense Tracker
-            </h1>
+            <div className="container">
+                <Header/>
+                <Footer/>
+            </div>
         </React.Fragment>
     )
 }
