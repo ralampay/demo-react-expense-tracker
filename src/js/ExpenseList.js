@@ -1,8 +1,35 @@
 import React, { useState } from 'react';
+import { Modal } from 'react-bootstrap';
 
 const ExpenseList = (props) => {
     return (
         <React.Fragment>
+            <Modal
+                show={false}
+            >
+                <Modal.Header>
+                    <Modal.Title>
+                        Confirmation
+                    </Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <p>
+                        Are you sure?
+                    </p>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button
+                        className="btn btn-success"
+                    >
+                        Yes
+                    </button>
+                    <button
+                        className="btn btn-danger"
+                    >
+                        No
+                    </button>
+                </Modal.Footer>
+            </Modal>
             <table className="table table-sm table-bordered mt-2">
                 <thead>
                     <tr>
