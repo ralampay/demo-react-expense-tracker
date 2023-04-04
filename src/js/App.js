@@ -4,7 +4,11 @@ import Header from './Header';
 import Footer from './Footer';
 import ExpenseForm from './ExpenseForm';
 import ExpenseList from './ExpenseList';
-import { getAll, remove, remove as removeExpense } from './services/ExpensesService';
+import { 
+    getAll, 
+    remove as removeExpense, 
+    create as createExpense 
+} from './services/ExpensesService';
 
 const App = () => {
 
@@ -30,18 +34,16 @@ const App = () => {
         })
     }
 
-    const addItem = (item, amount) => {
-        // Copy current items
-        let newItems = [...items];
-        let newId = 4;
-        let newItem = {
-            id: newId,
-            item: item,
-            amount: amount
-        }
-
-        newItems.push(newItem);
-        setItems(newItems);
+    const addItem = (args) => {
+        createExpense(args).then((response) => {
+            // Copy current items
+            let newItems = [...items];
+            newItems.push(response.data);
+            setItems(newItems);
+        }).catch((response) => {
+            alert("Error: Not able to add expense item");
+            console.log(response);
+        });
     }
 
     return (

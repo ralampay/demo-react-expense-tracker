@@ -8,3 +8,7 @@ export const getAll = () => {
 export const remove = (id) => {
     return axios.delete(`${API_BASE_URL}/expenses/${id}`)
 }
+
+export const create = (args) => {
+    return axios.post(`${API_BASE_URL}/expenses`, args)
+}

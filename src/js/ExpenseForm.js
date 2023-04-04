@@ -90,11 +90,12 @@ const ExpenseForm = (props) => {
                             setIsSubmitting(true);
 
                             const payload = {
-                                name: item,
-                                amount: amount
+                                item: item,
+                                amount: amount,
+                                category_id: categoryId
                             }
 
-                            props.addItem(payload.name, payload.amount);
+                            props.addItem(payload);
 
                             setIsSubmitting(false);
                             setItem("");

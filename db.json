@@ -17,6 +17,12 @@
       "item": "Item C",
       "amount": 300,
       "category_id": 2
+    },
+    {
+      "item": "Item D",
+      "amount": "400",
+      "category_id": "1",
+      "id": 4
     }
   ],
   "categories": [
