@@ -60,7 +60,7 @@ const ExpenseList = (props) => {
                         return (
                             <tr key={`item-row-${item.id}`}>
                                 <td>
-                                    {item.name}
+                                    {item.item}
                                 </td>
                                 <td>
                                     {item.amount}

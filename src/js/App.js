@@ -1,16 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
 import ExpenseForm from './ExpenseForm';
 import ExpenseList from './ExpenseList';
+import { getAll } from './services/ExpensesService';
 
 const App = () => {
 
-    const [items, setItems] = useState([
-        { id: 1, name: "Item A", amount: 100.0 },
-        { id: 2, name: "Item B", amount: 200.0 },
-        { id: 3, name: "Item C", amount: 300.0 }
-    ]);
+    const [items, setItems] = useState([]);
+
+    useEffect(() => {
+        getAll().then((response) => {
+            setItems(response.data);
+        }).catch((response) => {
+            alert("error!");
+            console.log(response);
+        })
+    }, [])
 
     const deleteItem = (id) => {
         let newItems = items.filter((item) => {
@@ -24,13 +31,13 @@ const App = () => {
         setItems(newItems);
     }
 
-    const addItem = (name, amount) => {
+    const addItem = (item, amount) => {
         // Copy current items
         let newItems = [...items];
         let newId = 4;
         let newItem = {
             id: newId,
-            name: name,
+            item: item,
             amount: amount
         }
 
