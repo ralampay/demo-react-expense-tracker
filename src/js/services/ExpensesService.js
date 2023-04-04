@@ -12,3 +12,11 @@ export const remove = (id) => {
 export const create = (args) => {
     return axios.post(`${API_BASE_URL}/expenses`, args)
 }
+
+export const update = (id, args) => {
+    return axios.put(`${API_BASE_URL}/expenses/${id}`, args);
+}
+
+export const fetchOne = (id) => {
+    return axios.get(`${API_BASE_URL}/expenses/${id}`)
+}

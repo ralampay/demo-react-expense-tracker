@@ -1,10 +1,10 @@
 {
   "expenses": [
     {
-      "id": 1,
       "item": "Item A",
-      "amount": 100,
-      "category_id": 1
+      "amount": "100",
+      "category_id": 1,
+      "id": 1
     },
     {
       "id": 2,
@@ -23,6 +23,12 @@
       "amount": "400",
       "category_id": "1",
       "id": 4
+    },
+    {
+      "item": "Item E",
+      "amount": "500",
+      "category_id": "1",
+      "id": 5
     }
   ],
   "categories": [

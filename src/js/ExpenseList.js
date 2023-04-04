@@ -66,15 +66,30 @@ const ExpenseList = (props) => {
                                     {item.amount}
                                 </td>
                                 <td>
-                                    <button
-                                        className="btn btn-danger w-100"
-                                        onClick={() => {
-                                            setIsModalOpen(true);
-                                            setCurrentId(item.id);
-                                        }}
-                                    >
-                                        Delete
-                                    </button>
+                                    <div className="row">
+                                        <div className="col">
+                                            <button
+                                                className="btn btn-info w-100"
+                                                onClick={() => {
+                                                    console.log(`Edit item ${item.id}`);
+                                                    props.setCurrentItem(item);
+                                                }}
+                                            >
+                                                Edit
+                                            </button>
+                                        </div>
+                                        <div className="col">
+                                            <button
+                                                className="btn btn-danger w-100"
+                                                onClick={() => {
+                                                    setIsModalOpen(true);
+                                                    setCurrentId(item.id);
+                                                }}
+                                            >
+                                                Delete
+                                            </button>
+                                        </div>
+                                    </div>
                                 </td>
                             </tr>
                         )

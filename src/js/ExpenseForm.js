@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { getAll } from './services/CategoriesService';
 
 const ExpenseForm = (props) => {
-
-    const [item, setItem] = useState("");
-    const [amount, setAmount] = useState(0.00);
-    const [categoryId, setCategoryId] = useState(-1);
     const [categories, setCategories] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -17,10 +13,6 @@ const ExpenseForm = (props) => {
             console.log(response);
         })
     }, [])
-
-    const handleItemOnChange = (event) => {
-        setItem(event.target.value)
-    }
 
     return (
         <React.Fragment>
@@ -34,8 +26,12 @@ const ExpenseForm = (props) => {
                                 </label>
                                 <input 
                                     className="form-control"
-                                    value={item}
-                                    onChange={handleItemOnChange}
+                                    value={props.item.item}
+                                    onChange={(event) => {
+                                        let item = {...props.item}
+                                        item.item = event.target.value;
+                                        props.setCurrentItem(item);
+                                    }}
                                     disabled={isSubmitting}
                                 />
                             </div>
@@ -48,10 +44,12 @@ const ExpenseForm = (props) => {
                                 <input 
                                     className="form-control" 
                                     type="number"
-                                    value={amount}
+                                    value={props.item.amount}
                                     disabled={isSubmitting}
                                     onChange={(event) => {
-                                        setAmount(event.target.value);
+                                        let item = {...props.item}
+                                        item.amount = event.target.value;
+                                        props.setCurrentItem(item);
                                     }}
                                 />
                             </div>
@@ -63,9 +61,11 @@ const ExpenseForm = (props) => {
                                 </label>
                                 <select 
                                     className="form-control" 
-                                    value={categoryId}
+                                    value={props.item.category_id}
                                     onChange={(event) => {
-                                        setCategoryId(event.target.value);
+                                        let item = {...props.item}
+                                        item.category_id = event.target.value;
+                                        props.setCurrentItem(item);
                                     }}
                                 >
                                     <option value="">
@@ -90,16 +90,15 @@ const ExpenseForm = (props) => {
                             setIsSubmitting(true);
 
                             const payload = {
-                                item: item,
-                                amount: amount,
-                                category_id: categoryId
+                                item: props.item.item,
+                                amount: props.item.amount,
+                                category_id: props.item.category_id
                             }
-
-                            props.addItem(payload);
+                            
+                            props.save(payload);
+                            props.resetItem();
 
                             setIsSubmitting(false);
-                            setItem("");
-                            setAmount(0.00);
                         }}
                     >
                         Save
