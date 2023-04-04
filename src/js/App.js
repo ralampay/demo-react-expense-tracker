@@ -4,7 +4,7 @@ import Header from './Header';
 import Footer from './Footer';
 import ExpenseForm from './ExpenseForm';
 import ExpenseList from './ExpenseList';
-import { getAll } from './services/ExpensesService';
+import { getAll, remove, remove as removeExpense } from './services/ExpensesService';
 
 const App = () => {
 
@@ -20,15 +20,14 @@ const App = () => {
     }, [])
 
     const deleteItem = (id) => {
-        let newItems = items.filter((item) => {
-            if (item.id == id) {
-                return false;
-            } else {
-                return true;
-            }
+        removeExpense(id).then((response) => {
+            setItems(items.filter((item) => {
+                return item.id != id;
+            }))
+        }).catch((response) => {
+            alert(`Error in deleting item ${id}`);
+            console.log(response);
         })
-
-        setItems(newItems);
     }
 
     const addItem = (item, amount) => {

@@ -1,11 +1,32 @@
 {
-    "expenses": [
-        { "id": 1, "item": "Item A", "amount": 100.00, "category_id": 1 },
-        { "id": 2, "item": "Item B", "amount": 200.00, "category_id": 1 },
-        { "id": 3, "item": "Item C", "amount": 300.00, "category_id": 2 }
-    ],
-    "categories": [
-        { "id": 1, "name": "Shoes" },
-        { "id": 2, "name": "Shirts" }
-    ]
+  "expenses": [
+    {
+      "id": 1,
+      "item": "Item A",
+      "amount": 100,
+      "category_id": 1
+    },
+    {
+      "id": 2,
+      "item": "Item B",
+      "amount": 200,
+      "category_id": 1
+    },
+    {
+      "id": 3,
+      "item": "Item C",
+      "amount": 300,
+      "category_id": 2
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Shoes"
+    },
+    {
+      "id": 2,
+      "name": "Shirts"
+    }
+  ]
 }
