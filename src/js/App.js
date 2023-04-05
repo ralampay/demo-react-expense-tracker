@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import {
+    Routes,
+    Route
+} from 'react-router-dom';
 import axios from 'axios';
 import Header from './Header';
 import Footer from './Footer';
@@ -87,17 +91,29 @@ const App = () => {
         <React.Fragment>
             <div className="container">
                 <Header/>
-                <ExpenseForm
-                    save={save}
-                    item={currentItem}
-                    setCurrentItem={setCurrentItem}
-                    resetItem={resetItem}
-                />
-                <ExpenseList
-                    items={items}
-                    deleteItem={deleteItem}
-                    setCurrentItem={setCurrentItem}
-                />
+                <Routes>
+                    <Route
+                        path="/"
+                        element={
+                            <ExpenseList
+                                items={items}
+                                deleteItem={deleteItem}
+                                setCurrentItem={setCurrentItem}
+                            />
+                        }
+                    />
+                    <Route
+                        path="/new"
+                        element={
+                            <ExpenseForm
+                                save={save}
+                                item={currentItem}
+                                setCurrentItem={setCurrentItem}
+                                resetItem={resetItem}
+                            />
+                        }
+                    />
+                </Routes>
                 <Footer/>
             </div>
         </React.Fragment>
