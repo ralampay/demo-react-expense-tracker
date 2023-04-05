@@ -1,9 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getAll } from './services/CategoriesService';
+import {
+    create as createExpense,
+    update as updateExpense
+} from './services/ExpensesService';
 
 const ExpenseForm = (props) => {
     const [categories, setCategories] = useState([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [expense, setExpense] = useState({
+        id: "",
+        item: "",
+        amount: "",
+        category_id: ""
+    })
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAll().then((response) => {
@@ -13,6 +26,26 @@ const ExpenseForm = (props) => {
             console.log(response);
         })
     }, [])
+
+    const save = () => {
+        if (!expense.id) {
+            // create
+            createExpense(expense).then((response) => {
+                navigate(`/expenses/${response.data.id}`);
+            }).catch((response) => {
+                alert("Error: Not able to add expense item");
+                console.log(response);
+            });
+        } else {
+            // update
+            updateExpense(expense.id, expense).then((response) => {
+                navigate(`/expenses/${response.data.id}`);
+            }).catch((response) => {
+                alert("Error in updating!");
+                console.log(response);
+            })
+        }
+    }
 
     return (
         <React.Fragment>
@@ -26,11 +59,12 @@ const ExpenseForm = (props) => {
                                 </label>
                                 <input 
                                     className="form-control"
-                                    value={props.item.item}
+                                    value={expense.item}
                                     onChange={(event) => {
-                                        let item = {...props.item}
-                                        item.item = event.target.value;
-                                        props.setCurrentItem(item);
+                                        let obj = {...expense}
+                                        obj.item = event.target.value;
+
+                                        setExpense(obj);
                                     }}
                                     disabled={isSubmitting}
                                 />
@@ -44,12 +78,12 @@ const ExpenseForm = (props) => {
                                 <input 
                                     className="form-control" 
                                     type="number"
-                                    value={props.item.amount}
+                                    value={expense.amount}
                                     disabled={isSubmitting}
                                     onChange={(event) => {
-                                        let item = {...props.item}
-                                        item.amount = event.target.value;
-                                        props.setCurrentItem(item);
+                                        let obj = {...expense}
+                                        obj.amount = event.target.value;
+                                        setExpense(obj);
                                     }}
                                 />
                             </div>
@@ -61,11 +95,12 @@ const ExpenseForm = (props) => {
                                 </label>
                                 <select 
                                     className="form-control" 
-                                    value={props.item.category_id}
+                                    value={expense.category_id}
                                     onChange={(event) => {
-                                        let item = {...props.item}
-                                        item.category_id = event.target.value;
-                                        props.setCurrentItem(item);
+                                        let obj = {...expense};
+                                        obj.category_id = event.target.value;
+
+                                        setExpense(obj);
                                     }}
                                 >
                                     <option value="">
@@ -88,17 +123,7 @@ const ExpenseForm = (props) => {
                         disabled={isSubmitting}
                         onClick={() => {
                             setIsSubmitting(true);
-
-                            const payload = {
-                                item: props.item.item,
-                                amount: props.item.amount,
-                                category_id: props.item.category_id
-                            }
-                            
-                            props.save(payload);
-                            props.resetItem();
-
-                            setIsSubmitting(false);
+                            save();
                         }}
                     >
                         Save
