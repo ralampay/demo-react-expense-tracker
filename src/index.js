@@ -4,11 +4,19 @@ import App from './js/App';
 import {
     HashRouter as Router
 } from 'react-router-dom';
+import {
+    isLoggedIn
+} from  './js/services/UsersService';
+import LoginForm  from './js/LoginForm';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
-root.render(
-    <Router>
-        <App />
-    </Router>
-)
+if (isLoggedIn()) {
+    root.render(
+        <Router>
+            <App />
+        </Router>
+    )
+} else {
+    root.render(<LoginForm/>)
+}
