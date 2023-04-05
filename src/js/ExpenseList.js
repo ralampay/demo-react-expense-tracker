@@ -4,20 +4,57 @@ import { getAll } from './services/ExpensesService';
 
 const ExpenseList = (props) => {
     const [items, setItems] = useState([]);
+    const [q, setQ] = useState("");
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        getAll().then((response) => {
+        refresh()
+    }, [])
+
+    const refresh = () => {
+        getAll(q).then((response) => {
             setItems(response.data);
         }).catch((response) => {
             alert("error!");
             console.log(response);
         })
-    }, [])
+    }
 
     return (
         <React.Fragment>
+            <div className="card">
+                <div className="card-body">
+                    <div className="row">
+                        <div className="col-md-10">
+                            <label>
+                                Search
+                            </label>
+                            <input
+                                value={q}
+                                className="form-control"
+                                onChange={(event) => {
+                                    setQ(event.target.value);
+                                }}
+                            />
+                        </div>
+                        <div className="col-md-2">
+                            <label>
+                                Actions
+                            </label>
+                            <br/>
+                            <button 
+                                className="btn btn-success"
+                                onClick={() => {
+                                    refresh();
+                                }}
+                            >
+                                Search
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <table className="table table-sm table-bordered mt-2">
                 <thead>
                     <tr>

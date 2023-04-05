@@ -1,8 +1,14 @@
 import axios from 'axios';
 import { API_BASE_URL } from 'env';
 
-export const getAll = () => {
-    return axios.get(`${API_BASE_URL}/expenses`);
+export const getAll = (q) => {
+    let url = `${API_BASE_URL}/expenses`;
+
+    if (q) {
+        url = `${url}?q=${q}`;
+    }
+
+    return axios.get(url);
 }
 
 export const remove = (id) => {
