@@ -28,5 +28,9 @@
       "id": 2,
       "name": "Shirts"
     }
-  ]
+  ],
+  "login": {
+    "token": "topsecrettoken",
+    "username": "john.doe"
+  }
 }
