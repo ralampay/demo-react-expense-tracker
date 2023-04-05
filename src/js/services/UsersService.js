@@ -6,6 +6,13 @@ import {
 const USER = "USER";
 const TOKEN = "TOKEN";
 
+export const buildHeaders = (args) => {
+    return {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
+    }
+}
+
 export const login = (args) => {
     return axios.post(`${API_BASE_URL}/login`, args)
 }

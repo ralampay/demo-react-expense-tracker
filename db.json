@@ -30,7 +30,7 @@
     }
   ],
   "login": {
-    "token": "06c4db0475f2926383274bf9fb6afbeb",
-    "username": "john.doe"
+    "username": "test",
+    "password": "test"
   }
 }
