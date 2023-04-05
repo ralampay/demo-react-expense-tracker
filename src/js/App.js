@@ -31,6 +31,10 @@ const App = () => {
                         element={<ExpenseForm/>}
                     />
                     <Route
+                        path="/expenses/:id/edit"
+                        element={<ExpenseForm/>}
+                    />
+                    <Route
                         path="/expenses/:id"
                         element={<ExpenseShow/>}
                     />

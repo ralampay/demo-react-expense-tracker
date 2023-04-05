@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getAll } from './services/CategoriesService';
 import {
+    fetchOne,
     create as createExpense,
     update as updateExpense
 } from './services/ExpensesService';
@@ -18,6 +19,8 @@ const ExpenseForm = (props) => {
 
     const navigate = useNavigate();
 
+    let { id } = useParams();
+
     useEffect(() => {
         getAll().then((response) => {
             setCategories(response.data);
@@ -25,6 +28,15 @@ const ExpenseForm = (props) => {
             alert("Error in fetching categories");
             console.log(response);
         })
+
+        if (id) {
+            fetchOne(id).then((response) => {
+                setExpense(response.data);
+            }).catch((response) => {
+                console.log(response);
+                alert(`Error in fetchOne(${id})`);
+            })
+        }
     }, [])
 
     const save = () => {

@@ -69,6 +69,14 @@ const Show = () => {
             </h2>
             <hr/>
             <button
+                className="btn btn-info w-100"
+                onClick={() => {
+                    navigate(`/expenses/${expense.id}/edit`);
+                }}
+            >
+                Edit
+            </button>
+            <button
                 className="btn btn-danger w-100"
                 onClick={() => {
                     setIsModalOpen(true);
