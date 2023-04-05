@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Modal } from 'react-bootstrap';
 import { getAll } from './services/ExpensesService';
 
 const ExpenseList = (props) => {
-
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [currentId, setCurrentId] = useState(-1);
     const [items, setItems] = useState([]);
 
     const navigate = useNavigate();
@@ -22,39 +18,6 @@ const ExpenseList = (props) => {
 
     return (
         <React.Fragment>
-            <Modal
-                show={isModalOpen}
-            >
-                <Modal.Header>
-                    <Modal.Title>
-                        Confirmation
-                    </Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <p>
-                        Are you sure?
-                    </p>
-                </Modal.Body>
-                <Modal.Footer>
-                    <button
-                        className="btn btn-success"
-                        onClick={() => {
-                            props.deleteItem(currentId);
-                            setIsModalOpen(false);
-                        }}
-                    >
-                        Yes
-                    </button>
-                    <button
-                        className="btn btn-danger"
-                        onClick={() => {
-                            setIsModalOpen(false);
-                        }}
-                    >
-                        No
-                    </button>
-                </Modal.Footer>
-            </Modal>
             <table className="table table-sm table-bordered mt-2">
                 <thead>
                     <tr>
