@@ -8,6 +8,7 @@ import Header from './Header';
 import Footer from './Footer';
 import ExpenseForm from './ExpenseForm';
 import ExpenseList from './ExpenseList';
+import ExpenseShow from './ExpenseShow';
 import { 
     getAll, 
     remove as removeExpense, 
@@ -112,6 +113,10 @@ const App = () => {
                                 resetItem={resetItem}
                             />
                         }
+                    />
+                    <Route
+                        path="/expenses/:id"
+                        element={<ExpenseShow/>}
                     />
                 </Routes>
                 <Footer/>

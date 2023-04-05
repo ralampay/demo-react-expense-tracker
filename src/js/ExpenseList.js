@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
+import { getAll } from './services/ExpensesService';
 
 const ExpenseList = (props) => {
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [currentId, setCurrentId] = useState(-1);
+    const [items, setItems] = useState([]);
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        getAll().then((response) => {
+            setItems(response.data);
+        }).catch((response) => {
+            alert("error!");
+            console.log(response);
+        })
+    }, [])
 
     return (
         <React.Fragment>
@@ -56,7 +70,7 @@ const ExpenseList = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {props.items.map((item) => {
+                    {items.map((item) => {
                         return (
                             <tr key={`item-row-${item.id}`}>
                                 <td>
@@ -69,24 +83,12 @@ const ExpenseList = (props) => {
                                     <div className="row">
                                         <div className="col">
                                             <button
-                                                className="btn btn-info w-100"
+                                                className="btn btn-primary w-100"
                                                 onClick={() => {
-                                                    console.log(`Edit item ${item.id}`);
-                                                    props.setCurrentItem(item);
+                                                    navigate(`/expenses/${item.id}`);
                                                 }}
                                             >
-                                                Edit
-                                            </button>
-                                        </div>
-                                        <div className="col">
-                                            <button
-                                                className="btn btn-danger w-100"
-                                                onClick={() => {
-                                                    setIsModalOpen(true);
-                                                    setCurrentId(item.id);
-                                                }}
-                                            >
-                                                Delete
+                                                Show
                                             </button>
                                         </div>
                                     </div>
